@@ -1,0 +1,33 @@
+databases:
+  - name: campusjobs-db
+    databaseName: campusjobs
+    plan: free
+
+services:
+  - type: web
+    name: campusjobs-java
+    env: docker
+    plan: free
+    autoDeploy: true
+    # ดึงค่าจาก database ที่ประกาศข้างบน
+    envVars:
+      - key: POSTGRES_HOST
+        fromDatabase:
+          name: campusjobs-db
+          property: host
+      - key: POSTGRES_PORT
+        fromDatabase:
+          name: campusjobs-db
+          property: port
+      - key: POSTGRES_DB
+        fromDatabase:
+          name: campusjobs-db
+          property: database
+      - key: POSTGRES_USER
+        fromDatabase:
+          name: campusjobs-db
+          property: user
+      - key: POSTGRES_PASSWORD
+        fromDatabase:
+          name: campusjobs-db
+          property: password
