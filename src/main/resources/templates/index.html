@@ -1,13 +1,19 @@
-<th:block th:replace="_layout :: body">
-  <section>
-    <h1>รายการงานสำหรับนักศึกษา</h1>
-    <div th:if="${#lists.isEmpty(jobs)}">ยังไม่มีงาน</div>
-    <ul th:if="${!#lists.isEmpty(jobs)}" class="jobs">
-      <li th:each="j : ${jobs}">
-        <h3 th:text="${j.title}">ชื่องาน</h3>
-        <p th:text="${j.description}">รายละเอียด</p>
-        <small th:text="${#temporals.format(j.createdAt, 'dd/MM/yyyy HH:mm')}">วันที่</small>
-      </li>
-    </ul>
-  </section>
-</th:block>
+<!doctype html>
+<html lang="th" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Campus Jobs</title>
+</head>
+<body>
+  <h1>รายการงานสำหรับนักศึกษา</h1>
+  <p th:if="${error}" style="color:#b00020;" th:text="${error}">มีข้อผิดพลาด</p>
+  <div th:if="${#lists.isEmpty(jobs)}">ยังไม่มีงาน</div>
+  <ul th:if="${!#lists.isEmpty(jobs)}">
+    <li th:each="j : ${jobs}">
+      <strong th:text="${j.title}">ชื่องาน</strong>
+      <div th:text="${j.description}">รายละเอียด</div>
+    </li>
+  </ul>
+  <p><a href="/login">เข้าสู่ระบบ</a> | <a href="/register">สมัครสมาชิก</a></p>
+</body>
+</html>
